@@ -1,0 +1,49 @@
+/* LIST STYLES */
+#list{
+    max-width: 750px;
+    margin: 15px auto;
+}
+
+#list .joke-group{
+    /* display:  */
+    /* min-height: 25px; */
+    /* background-color: red; */
+    padding: 15px;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+    border-bottom: 1px solid #ccc;
+}
+
+#list .joke-group>div{
+    width: 100%;
+    /* background: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#list .joke-group blockquote{
+    /* width: 100%; */
+    display: inline-block;
+    max-width: 85%;
+    /* background-color: red; */
+}
+
+/* #list .joke-group>div>div {
+    justify-self: end;
+    align-self: flex-end;
+    width: 72px !important;
+} */
+
+#list .joke-group form input[type="submit"]{
+    cursor: pointer;
+}
+
+#list .joke-group small{
+    color: #5D5D5D;
+}
+
+#list a{
+    text-decoration: none;
+}

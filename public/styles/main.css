@@ -1,0 +1,75 @@
+@import './pages/home.css';
+@import './pages/list.css';
+@import './pages/add.css';
+
+/* GENERAL */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* MAIN_LAYOUT*/
+header{
+    background-color:  #3AAD82;
+    color: #fff;
+}
+
+header div{
+    height: 120px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+header h2{
+    font-size: 32px;
+    font-weight: 100;
+}
+
+nav{
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #413957;
+}
+
+nav a{
+    text-decoration: none;
+    color: #fff;
+}
+
+nav a:hover{
+    text-decoration: underline;
+}
+
+/* main{
+
+} */
+
+footer{
+    width: 100%;
+    background-color: #EBBA9C;
+    color: #000;
+    /* position: fixed; */
+    /* position */
+    /* bottom: 0; */
+    /* display: flex; */
+    /* margin-bottom: 0; */
+    /* align-self: flex-end; */
+}
+
+footer div{
+    height: 45px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}

@@ -1,0 +1,22 @@
+/* HOME STYLE */
+#home{
+    background-color: default;
+}
+
+#home .text-group{
+    /* width: 90%; */
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0 10px
+}
+
+#home .title{
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+#home .paragraph{
+    text-align: justify;
+    font-size: 16px;
+    font-weight: 100;
+}
