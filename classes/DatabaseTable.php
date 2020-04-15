@@ -1,9 +1,13 @@
 <?php
 class DatabaseTable
 {
-    private function query($pdo, $sql, $parameters = [])
+    public $pdo;
+    public $table;
+    public $primaryKey;
+
+    private function query($sql, $parameters = [])
     {
-        $query = $pdo->prepare($sql);
+        $query = $this->pdo->prepare($sql);
         $query->execute($parameters);
         return $query;
     }
@@ -18,34 +22,34 @@ class DatabaseTable
         return $fields;
     }
 
-    public function totalCount($pdo, $table)
+    public function totalCount()
     {
-        $sql = "SELECT COUNT(*) FROM `" . $table . "`";
-        $query = $this->query($pdo, $sql);
+        $sql = "SELECT COUNT(*) FROM `" . $this->table . "`";
+        $query = $this->query($sql);
         $row = $query->fetch();
         return $row[0];
     }
 
-    public function getAll($pdo, $table)
+    public function getAll()
     {
-        $sql = "SELECT * FROM `" . $table ."`";
-        $query = $this->query($pdo, $sql);
+        $sql = "SELECT * FROM `" . $this->table ."`";
+        $query = $this->query($sql);
         return $query->fetchAll();
     }
 
-    public function getById($pdo, $table, $primaryKey, $pkValue)
+    public function getById($pkValue)
     {
-        $sql = "SELECT * FROM `" . $table . "`WHERE `" . $primaryKey . "` = :pkValue";
+        $sql = "SELECT * FROM `" . $this->table . "`WHERE `" . $this->primaryKey . "` = :pkValue";
         $parameters = [
             'pkValue' => $pkValue
         ];
-        $query = $this->query($pdo, $sql, $parameters);
+        $query = $this->query($sql, $parameters);
         return $query->fetch();
     }
 
-    private function insert($pdo, $table, $fields)
+    private function insert($fields)
     {
-        $sql = "INSERT INTO `" . $table . "` (";
+        $sql = "INSERT INTO `" . $this->table . "` (";
         foreach ($fields as $key => $values) {
             $sql .= '`'. $key . '`,';
         }
@@ -57,32 +61,32 @@ class DatabaseTable
         $sql = rtrim($sql, ',');
         $sql .= ')';
         $fields = $this->processDates($fields);
-        $this->query($pdo, $sql, $fields);
+        $this->query($sql, $fields);
     }
 
-    private function update($pdo, $table, $fields, $primaryKey)
+    private function update($fields)
     {
-        $sql = "UPDATE `" . $table . "` SET ";
+        $sql = "UPDATE `" . $this->table . "` SET ";
         foreach ($fields as $key => $value) {
         $sql .= '`' . $key . '` = :' . $key . ',';
         }
         $sql = rtrim($sql, ',');
-        $sql .= " WHERE `" . $primaryKey . "` = :primaryKey";
+        $sql .= " WHERE `" . $this->primaryKey . "` = :primaryKey";
         $fields['primaryKey'] = $fields['id'];
         $fields = $this->processDates($fields);
-        $this->query($pdo, $sql, $fields);
+        $this->query($sql, $fields);
     }
 
-    public function save($pdo, $table,  $fields, $primaryKey)
+    public function save($fields)
     {
         try {
-            if ($fields[$primaryKey] == '') {
-                $fields[$primaryKey] = null;
+            if ($fields[$this->primaryKey] == '') {
+                $fields[$this->primaryKey] = null;
             }
-            $this->insert($pdo, $table, $fields);
+            $this->insert($fields);
         }
         catch (PDOException $e) {
-            $this->update($pdo, $table, $fields, $primaryKey);
+            $this->update($fields);
         }
     }
 
