@@ -3,11 +3,11 @@
 try {
     include_once __DIR__.'/../includes/databaseConnection.php';
     // include_once __DIR__.'/../functions/databaseFunctions.php';
-    include_once __DIR__.'/../classes/DatabaseTable.php';
+    include_once __DIR__.'/../ninja-framework/DatabaseTable.php';
 
     $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
 
-    $totaljoke = $jokesTable->totalCount($pdo, 'joke');
+    $totaljoke = $jokesTable->totalCount();
 
     $title = 'home';
 
