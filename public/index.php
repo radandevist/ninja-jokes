@@ -1,14 +1,18 @@
 <?php
-include_once __DIR__.'/../includes/databaseConnection.php';
-include_once __DIR__.'/../functions/databaseFunctions.php';
 
 try {
+    include_once __DIR__.'/../includes/databaseConnection.php';
+    // include_once __DIR__.'/../functions/databaseFunctions.php';
+    include_once __DIR__.'/../classes/DatabaseTable.php';
+
+    $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+
+    $totaljoke = $jokesTable->totalCount($pdo, 'joke');
+
     $title = 'home';
 
-    $totaljoke = total($pdo, 'joke');
-
     ob_start();
-    include_once __DIR__.'/../views/layouts/home.html.php';
+    include_once __DIR__.'/../views/contents/home.html.php';
     $content = ob_get_clean();
 
 } catch (\Throwable $th) {
@@ -17,4 +21,4 @@ try {
     $content = 'An error has occured: '.$th->getMessage().' in '.$th->getfile().' at line '.$th->getLine();
 }
 
-include_once __DIR__.'/../views/main.html.php';
+include_once __DIR__.'/../views/layouts/main.html.php';

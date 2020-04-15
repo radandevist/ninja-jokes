@@ -97,11 +97,11 @@ class DatabaseTable
         }
     }
 
-    public function delete($pdo, $table, $primaryKey, $pkValue)
+    public function delete($pkValue)
     {
-        $sql = "DELETE FROM `" . $table . "` WHERE " . $primaryKey . " = :id";
+        $sql = "DELETE FROM `" . $this->table . "` WHERE " . $this->primaryKey . " = :id";
         $parameters = ['id' => $pkValue];
-        $this->query($pdo, $sql, $parameters);
+        $this->query($sql, $parameters);
     }
 
 }

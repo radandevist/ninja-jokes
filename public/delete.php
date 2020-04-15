@@ -1,10 +1,13 @@
 <?php
-include_once __DIR__.'/../includes/databaseConnection.php';
-include_once __DIR__.'/../functions/databaseFunctions.php';
 
 try {
+    include_once __DIR__.'/../includes/databaseConnection.php';
+    // include_once __DIR__.'/../functions/databaseFunctions.php';
+    include_once __DIR__.'/../classes/DatabaseTable.php';
 
-    delete($pdo, 'joke', 'id', $_POST['id']);
+    $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+
+    $jokesTable->delete($_POST['id']);
 
     header('location: /list.php');
 

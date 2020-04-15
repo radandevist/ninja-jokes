@@ -1,18 +1,21 @@
 <?php
-include_once __DIR__.'/../includes/databaseConnection.php';
-include_once __DIR__.'/../functions/databaseFunctions.php';
 
 try {
+    include_once __DIR__.'/../includes/databaseConnection.php';
+    // include_once __DIR__.'/../functions/databaseFunctions.php';
+    include_once __DIR__.'/../classes/DatabaseTable.php';
+
+    $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
 
     if(isset($_POST['joke']['joketext'])) {
 
-        $default_author_id = 1;
+        $default_author_id = 3;
 
         $records = $_POST['joke'];
         $records['authorid'] = $default_author_id;
         $records['jokedate'] = new DateTime();
 
-        save($pdo, 'joke', $records, 'id');
+        $jokesTable->save($records);
 
         header('location: /list.php');
 
@@ -23,11 +26,11 @@ try {
 
         if (isset($_GET['id'])) {
             $title = 'editJoke';
-            $joke = findById($pdo, 'joke', 'id', $_GET['id']);
+            $joke = $jokesTable->getById($_GET['id']);
         }
 
         ob_start();
-        include_once __DIR__.'/../views/layouts/edit.html.php';
+        include_once __DIR__.'/../views/contents/edit.html.php';
         $content = ob_get_clean();
 
     }
@@ -37,4 +40,4 @@ try {
     $content = 'An error has occured: '.$th->getMessage().' in '.$th->getfile().' at line '.$th->getLine();
 }
 
-include_once __DIR__.'/../views/main.html.php';
+include_once __DIR__.'/../views/layouts/main.html.php';

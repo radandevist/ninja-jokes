@@ -1,17 +1,19 @@
 <?php
-include_once __DIR__.'/../includes/databaseConnection.php';
-include_once __DIR__.'/../functions/databaseFunctions.php';
 
 try {
-    $title = 'listJokes';
+    include_once __DIR__.'/../includes/databaseConnection.php';
+    // include_once __DIR__.'/../functions/databaseFunctions.php';
+    include_once __DIR__.'/../classes/DatabaseTable.php';
 
-    // $jokes = allJokes($pdo);
-    $result = findAll($pdo, 'joke');
+    $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+    $authorsTable = new DatabaseTable($pdo, 'author', 'id');
+
+    $result = $jokesTable->getAll();
+    // print_r($result);
 
     $jokes = [];
     foreach ($result as $joke) {
-        $author = findById($pdo, 'author', 'id',
-        $joke['authorid']);
+        $author = $authorsTable->getById($joke['authorid']);
         $jokes[] = [
             'id' => $joke['id'],
             'joketext' => $joke['joketext'],
@@ -23,8 +25,10 @@ try {
 
     // print_r($jokes);
 
+    $title = 'listJokes';
+
     ob_start();
-    include_once __DIR__.'/../views/layouts/list.html.php';
+    include_once __DIR__.'/../views/contents/list.html.php';
     $content = ob_get_clean();
 
 } catch (\Throwable $th) {
@@ -33,4 +37,4 @@ try {
     $content = 'An error has occured: '.$th->getMessage().' in '.$th->getfile().' at line '.$th->getLine();
 }
 
-include_once __DIR__.'/../views/main.html.php';
+include_once __DIR__.'/../views/layouts/main.html.php';
