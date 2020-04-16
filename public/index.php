@@ -21,7 +21,9 @@ try {
     // $jokeController = new JokeController($jokesTable, $authorsTable);
 
     // $action = $_GET['action'] ?? 'home';
-    $route = $_GET['r'] ?? 'joke/home';
+    // $route = $_GET['r'] ?? 'joke/home';
+    // echo($_SERVER['REQUEST_URI']);
+    $route = ltrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
     // if ($action == strtolower($action))
     // {
@@ -35,7 +37,7 @@ try {
             include __DIR__ .'/../classes/controllers/JokeController.php';
             $controller = new JokeController($jokesTable, $authorsTable);
             $page = $controller->list();
-        } elseif ($route === 'joke/home') {
+        } elseif ($route === 'joke/home' || $route === '') {
             include __DIR__ .'/../classes/controllers/JokeController.php';
             $controller = new JokeController($jokesTable,$authorsTable);
             $page = $controller->home();
