@@ -75,7 +75,8 @@ class JokeController
 
             $this->jokesTable->save($records);
 
-            header('location: /index.php?action=list');
+            http_response_code(301);
+            header('location: /index.php?r=joke/list');
 
             exit;
 
@@ -106,7 +107,8 @@ class JokeController
     {
         $this->jokesTable->delete($_POST['id']);
 
-        header('location: /index.php?action=list');
+        http_response_code(301);
+        header('location: /index.php?r=joke/list');
 
         exit;
     }

@@ -7,8 +7,8 @@
             <p><?php echo htmlspecialchars($joke['joketext'], ENT_QUOTES, 'utf-8') ?></p>
          </blockquote>
          <!-- <div> -->
-         <form action="/index.php?action=delete" method="post">
-            <a href="/index.php?action=edit&id=<?php echo $joke['id'] ?>">edit</a>
+         <form action="/index.php?r=joke/delete" method="post">
+            <a href="/index.php?r=joke/edit&id=<?php echo $joke['id'] ?>">edit</a>
             <input type="hidden" name="id" value="<?php echo $joke['id'] ?>">
             <input type="submit" value="Delete">
          </form>
