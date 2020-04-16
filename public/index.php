@@ -3,16 +3,23 @@
 try {
     include_once __DIR__.'/../includes/databaseConnection.php';
     // include_once __DIR__.'/../functions/databaseFunctions.php';
-    include_once __DIR__.'/../ninja-framework/DatabaseTable.php';
+    include_once __DIR__.'/../classes/DatabaseTable.php';
+    include_once __DIR__.'/../controllers/JokeController.php';
 
     $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+    $authorsTable = new DatabaseTable($pdo, 'author', 'id');
 
-    $totaljoke = $jokesTable->totalCount();
+    $jokeController = new JokeController($jokesTable, $authorsTable);
 
-    $title = 'home';
+    $action = $_GET['action'] ?? 'home';
+    $page = $jokeController->$action();
+
+    $title = $page['title'];
+
+    extract($page['variables']);
 
     ob_start();
-    include_once __DIR__.'/../views/contents/home.html.php';
+    include_once __DIR__.'/../views/contents/'.$page['content'];
     $content = ob_get_clean();
 
 } catch (\Throwable $th) {

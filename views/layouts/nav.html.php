@@ -1,7 +1,7 @@
 <nav>
     <a href='/index.php'>Home</a>
-    <a href='/list.php'>list</a>
-    <a href='/edit.php'>add</a>
+    <a href='/index.php?action=list'>list</a>
+    <a href='/index.php?action=edit'>add</a>
     <!-- <a href='/add.php'>add</a> -->
 
 </nav>

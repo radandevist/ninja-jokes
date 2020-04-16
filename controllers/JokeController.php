@@ -1,6 +1,6 @@
 <?php
 
-class JokeControllers
+class JokeController
 {
     private $authorsTable;
     private $jokesTable;
@@ -17,9 +17,17 @@ class JokeControllers
 
         $title = 'home';
 
-        ob_start();
-        include_once __DIR__.'/../views/contents/home.html.php';
-        $content = ob_get_clean();
+        // ob_start();
+        // include_once __DIR__.'/../views/contents/home.html.php';
+        // $content = ob_get_clean();
+
+        $content = 'home.html.php';
+
+        return [
+            'content' => $content,
+            'title' => $title,
+            'variables' => ['totaljoke' => $totaljoke]
+        ];
     }
 
     public function list()
@@ -42,9 +50,17 @@ class JokeControllers
 
         $title = 'listJokes';
 
-        ob_start();
-        include_once __DIR__.'/../views/contents/list.html.php';
-        $content = ob_get_clean();
+        // ob_start();
+        // include_once __DIR__.'/../views/contents/list.html.php';
+        // $content = ob_get_clean();
+
+        $content = 'list.html.php';
+
+        return [
+            'content' => $content,
+            'title' => $title,
+            'variables' => ['jokes' => $jokes]
+        ];
     }
 
      public function edit()
@@ -59,7 +75,7 @@ class JokeControllers
 
             $this->jokesTable->save($records);
 
-            header('location: /list.php');
+            header('location: /index.php?action=list');
 
             exit;
 
@@ -71,18 +87,26 @@ class JokeControllers
                 $joke = $this->jokesTable->getById($_GET['id']);
             }
 
-            ob_start();
-            include_once __DIR__.'/../views/contents/edit.html.php';
-            $content = ob_get_clean();
+            // ob_start();
+            // include_once __DIR__.'/../views/contents/edit.html.php';
+            // $content = ob_get_clean();
+
+            $content = 'edit.html.php';
 
         }
+
+        return [
+            'content' => $content,
+            'title' => $title,
+            'variables' => ['joke' => $joke ?? null]
+        ];
     }
 
     public function delete()
     {
         $this->jokesTable->delete($_POST['id']);
 
-        header('location: /list.php');
+        header('location: /index.php?action=list');
 
         exit;
     }

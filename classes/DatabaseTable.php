@@ -1,4 +1,5 @@
 <?php
+
 class DatabaseTable
 {
     private $pdo;
