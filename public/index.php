@@ -1,5 +1,14 @@
 <?php
 
+function loadTemplate($contentFileName, $variables = [])
+{
+    extract($variables);
+
+    ob_start();
+    include_once __DIR__.'/../views/contents/'.$contentFileName;
+    $content = ob_get_clean();
+}
+
 try {
     include_once __DIR__.'/../includes/databaseConnection.php';
     // include_once __DIR__.'/../functions/databaseFunctions.php';
@@ -16,11 +25,11 @@ try {
 
     $title = $page['title'];
 
-    extract($page['variables']);
-
-    ob_start();
-    include_once __DIR__.'/../views/contents/'.$page['content'];
-    $content = ob_get_clean();
+    if (isset($pages['variables'])){
+        loadTemplate($page['content'], $page['variables']);
+    } else {
+        loadTemplate(($page['content']));
+    }
 
 } catch (\Throwable $th) {
     $title = 'Error';
