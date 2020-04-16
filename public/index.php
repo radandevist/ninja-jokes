@@ -6,7 +6,7 @@ function loadTemplate($contentFileName, $variables = [])
 
     ob_start();
     include_once __DIR__.'/../views/contents/'.$contentFileName;
-    $content = ob_get_clean();
+    return ob_get_clean();
 }
 
 try {
@@ -25,10 +25,10 @@ try {
 
     $title = $page['title'];
 
-    if (isset($pages['variables'])){
-        loadTemplate($page['content'], $page['variables']);
+    if (isset($page['variables'])){
+        $content = loadTemplate($page['content'], $page['variables']);
     } else {
-        loadTemplate(($page['content']));
+        $content = loadTemplate(($page['content']));
     }
 
 } catch (\Throwable $th) {
