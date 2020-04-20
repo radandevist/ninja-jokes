@@ -20,10 +20,6 @@ class Joke
 
         $title = 'home';
 
-        // ob_start();
-        // include_once __DIR__.'/../views/contents/home.html.php';
-        // $content = ob_get_clean();
-
         $content = 'home.html.php';
 
         return [
@@ -49,13 +45,7 @@ class Joke
             ];
         }
 
-        // print_r($jokes);
-
         $title = 'listJokes';
-
-        // ob_start();
-        // include_once __DIR__.'/../views/contents/list.html.php';
-        // $content = ob_get_clean();
 
         $content = 'list.html.php';
 
@@ -66,24 +56,24 @@ class Joke
         ];
     }
 
-     public function edit()
+    public function edit()
     {
-        if(isset($_POST['joke']['joketext'])) {
+        // if(isset($_POST['joke']['joketext'])) {
 
-            $default_author_id = 3;//temporary
+            // $default_author_id = 3;//temporary
 
-            $records = $_POST['joke'];
-            $records['authorid'] = $default_author_id;
-            $records['jokedate'] = new \DateTime();
+            // $records = $_POST['joke'];
+            // $records['authorid'] = $default_author_id;
+            // $records['jokedate'] = new \DateTime();
 
-            $this->jokesTable->save($records);
+            // $this->jokesTable->save($records);
 
-            http_response_code(301);
-            header('location: /joke/list');
+            // http_response_code(301);
+            // header('location: /joke/list');
 
-            exit;
+            // exit;
 
-        } else {
+        // } else {
             $title = 'addJoke';
 
             if (isset($_GET['id'])) {
@@ -91,19 +81,30 @@ class Joke
                 $joke = $this->jokesTable->getById($_GET['id']);
             }
 
-            // ob_start();
-            // include_once __DIR__.'/../views/contents/edit.html.php';
-            // $content = ob_get_clean();
-
             $content = 'edit.html.php';
-
-        }
+        // }
 
         return [
             'content' => $content,
             'title' => $title,
             'variables' => ['joke' => $joke ?? null]
         ];
+    }
+
+    public function saveEdit()
+    {
+        $default_author_id = 3;//temporary
+
+        $records = $_POST['joke'];
+        $records['authorid'] = $default_author_id;
+        $records['jokedate'] = new \DateTime();
+
+        $this->jokesTable->save($records);
+
+        http_response_code(301);
+        header('location: /joke/list');
+
+        exit;
     }
 
     public function delete()
