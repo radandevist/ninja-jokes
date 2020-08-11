@@ -1,11 +1,12 @@
 <?php
 
 try {
-//     var_dump($_SERVER);
+    // var_dump($_SERVER);
 
     include_once __DIR__.'/../includes/autoload.php';
 
     $route = ltrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
+    // var_dump($route);
     $method = $_SERVER['REQUEST_METHOD'];
     $jokeRoutes = new \JokesDB\JokesRoutes();
     $entryPoint = new \NinjaFramework\EntryPoint($route, $method, $jokeRoutes);

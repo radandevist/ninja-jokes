@@ -1,0 +1,13 @@
+#list {
+    padding-top: 2rem;
+}
+
+#list form .btn-link:focus {
+    box-shadow: none;
+}
+
+blockquote {
+    background-color: rgba(52, 58, 64, 0.025);
+    min-height: 36px;
+    line-height: auto;
+}

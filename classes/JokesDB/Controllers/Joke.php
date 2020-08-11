@@ -58,22 +58,6 @@ class Joke
 
     public function edit()
     {
-        // if(isset($_POST['joke']['joketext'])) {
-
-            // $default_author_id = 3;//temporary
-
-            // $records = $_POST['joke'];
-            // $records['authorid'] = $default_author_id;
-            // $records['jokedate'] = new \DateTime();
-
-            // $this->jokesTable->save($records);
-
-            // http_response_code(301);
-            // header('location: /joke/list');
-
-            // exit;
-
-        // } else {
             $title = 'addJoke';
 
             if (isset($_GET['id'])) {
@@ -82,8 +66,7 @@ class Joke
             }
 
             $content = 'edit.html.php';
-        // }
-
+            
         return [
             'content' => $content,
             'title' => $title,

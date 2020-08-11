@@ -3,6 +3,8 @@ namespace JokesDB;
 
 use \NinjaFramework\DatabaseTable;
 use \JokesDB\Controllers\Joke;
+use JokesDB\Controllers\Register;
+
 // use \JokesDB\Controllers\Register;
 
 class JokesRoutes implements \NinjaFramework\Routes
@@ -15,6 +17,7 @@ class JokesRoutes implements \NinjaFramework\Routes
         $authorsTable = new DatabaseTable($pdo, 'author', 'id');
 
         $jokeController = new Joke($jokesTable, $authorsTable);
+        $authorController = new Register($authorsTable);
 
         $routes = [
             '' => [
@@ -43,6 +46,16 @@ class JokesRoutes implements \NinjaFramework\Routes
                 'POST' => [
                     'controller' => $jokeController,
                     'action' => 'delete'
+                ]
+            ],
+            'author/register' => [
+                'POST' => [
+                    'controller' => $authorController,
+                    'action' => 'registerUser'
+                ],
+                'GET' => [
+                    'controller' => $authorController,
+                    'action' => 'registrationForm'
                 ]
             ]
         ];

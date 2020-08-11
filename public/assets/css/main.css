@@ -1,0 +1,13 @@
+@import './pages/home.css';
+@import './pages/list.css';
+@import './pages/add.css';
+@import './pages/register.css';
+
+/* GENERAL */
+body {
+    min-height: 100vh;
+}
+
+main .container{
+    min-height: 80vh;
+}
