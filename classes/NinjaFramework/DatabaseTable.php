@@ -110,4 +110,14 @@ class DatabaseTable
         $this->query($sql, $parameters);
     }
 
+    public function find($column, $value)
+    {
+        $sql = "SELECT * FROM `" . $this->table . "`WHERE `" . $column . "` = :value";
+        $parameters = [
+            'value' => $value
+        ];
+        $query = $this->query($sql, $parameters);
+        return $query->fetchAll();
+    }
+
 }

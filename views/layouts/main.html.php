@@ -22,7 +22,7 @@
         </div>
     </main>
 
-    <footer class="bg-dark py-1 pt-2 text-white">
+    <footer class="bg-dark mt-3 py-1 pt-2 text-white">
         <div class="container mt-3">
         <p>copyright &copy;<?php echo date('Y'); ?> IJDB</p>
         </div>

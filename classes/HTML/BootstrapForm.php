@@ -3,15 +3,12 @@ namespace HTML;
 
 class BootstrapForm
 {
-    public function input($type , $id, $name, $label)
+    public function input($type , $id, $name, $label, $value = '')
     {
-      // $snippet = 
-      // "<label for='$id'>$label</label>
-      // <input name='$name' id='$id' type='$type'>";
         $snipp = 
         "<div class='form-group'>
         <label for='$id'>$label</label>
-        <input name type='$type' class='form-control' id='$id'>
+        <input name='$name' type='$type' class='form-control' id='$id' value='$value'>
         </div>";
         return $snipp;
     }
