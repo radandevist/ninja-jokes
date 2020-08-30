@@ -4,20 +4,31 @@ namespace JokesDB;
 use \NinjaFramework\DatabaseTable;
 use \JokesDB\Controllers\Joke;
 use JokesDB\Controllers\Register;
-
-// use \JokesDB\Controllers\Register;
+use \NinjaFramework\Auth;
+use JokesDB\Controllers\Login;
 
 class JokesRoutes implements \NinjaFramework\Routes
 {
-    public function getRoutes()
+    private $authorsTable;
+    private $jokesTable;
+
+    private $authentication;
+
+    public function __construct()
     {
-        include_once __DIR__.'/../../includes/databaseConnection.php';
+        include __DIR__.'/../../includes/databaseConnection.php';
 
-        $jokesTable = new DatabaseTable($pdo, 'joke', 'id');
-        $authorsTable = new DatabaseTable($pdo, 'author', 'id');
+        $this->jokesTable = new DatabaseTable($pdo, 'joke', 'id');
+        $this->authorsTable = new DatabaseTable($pdo, 'author', 'id');
+        
+        $this->authentication = new Auth($this->authorsTable, 'email', 'password');
+    }
 
-        $jokeController = new Joke($jokesTable, $authorsTable);
-        $authorController = new Register($authorsTable);
+    public function getRoutes(): array
+    {
+        $jokeController = new Joke($this->jokesTable, $this->authorsTable);
+        $authorController = new Register($this->authorsTable);
+        $loginController = new Login;
 
         $routes = [
             '' => [
@@ -40,13 +51,15 @@ class JokesRoutes implements \NinjaFramework\Routes
                 'GET' => [
                     'controller' => $jokeController,
                     'action' => 'edit'
-                ]
+                ],
+                'login' => true
             ],
             'joke/delete' => [
                 'POST' => [
                     'controller' => $jokeController,
                     'action' => 'delete'
-                ]
+                ],
+                'login' => true
             ],
             'author/register' => [
                 'POST' => [
@@ -63,9 +76,20 @@ class JokesRoutes implements \NinjaFramework\Routes
                     'controller' => $authorController,
                     'action' => 'success'
                 ]
-            ]
+            ],
+            'login/error' => [
+                'GET' => [
+                'controller' => $loginController,
+                'action' => 'error'
+                ]
+            ]                
         ];
 
         return $routes;
+    }
+
+    public function getAuth(): Auth
+    {
+        return $this->authentication;
     }
 }
