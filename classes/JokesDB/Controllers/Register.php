@@ -4,7 +4,7 @@ namespace JokesDB\Controllers;
 use NinjaFramework\DatabaseTable;
 
 class Register
-{   
+{
     private $authorsTable;
 
     public function __construct(DatabaseTable $authorsTable)

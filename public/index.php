@@ -5,6 +5,8 @@ try {
 
     include_once __DIR__.'/../includes/autoload.php';
 
+    // var_dump($_SESSION);
+
     $route = ltrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
     // var_dump($route);
     $method = $_SERVER['REQUEST_METHOD'];

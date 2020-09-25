@@ -76,7 +76,7 @@ class Joke
 
     public function saveEdit()
     {
-        $default_author_id = 3;//temporary
+        $default_author_id = 15;//temporary
 
         $records = $_POST['joke'];
         $records['authorid'] = $default_author_id;

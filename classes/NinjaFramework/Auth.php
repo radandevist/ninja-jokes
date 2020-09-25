@@ -23,7 +23,7 @@ class Auth
             && password_verify($password, $user[0][$this->passwordColumn])) {
             session_regenerate_id();
             $_SESSION['username'] = $username;
-            $_SESSION['password'] = $user[$this->passwordColumn];
+            $_SESSION['password'] = $user[0][$this->passwordColumn];
             return true;
         } else {
             return false;

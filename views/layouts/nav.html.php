@@ -13,9 +13,12 @@
       <li class="nav-item">
         <a class="nav-link" href='/joke/edit'>add</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link btn btn-primary" href="/author/register" role="button">Login</a>
-    </li>
+      <li class="nav-item ml-3">
+        <a class="nav-link btn btn-primary text-white" href="/author/register" role="button">Register</a>
+      </li>
+      <li class="nav-item ml-3">
+        <a class="nav-link btn btn-primary btn-success text-white" href="/login" role="button">Login</a>
+      </li>
     </ul>
   </div>
 </nav>

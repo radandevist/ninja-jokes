@@ -28,7 +28,7 @@ class JokesRoutes implements \NinjaFramework\Routes
     {
         $jokeController = new Joke($this->jokesTable, $this->authorsTable);
         $authorController = new Register($this->authorsTable);
-        $loginController = new Login;
+        $loginController = new Login($this->authentication);
 
         $routes = [
             '' => [
@@ -79,10 +79,27 @@ class JokesRoutes implements \NinjaFramework\Routes
             ],
             'login/error' => [
                 'GET' => [
-                'controller' => $loginController,
-                'action' => 'error'
+                    'controller' => $loginController,
+                    'action' => 'error'
                 ]
-            ]                
+            ],
+            'login'   => [
+                'GET' => [
+                    'controller' => $loginController,
+                    'action' => 'loginForm'
+                ],
+                'POST' => [
+                    'controller' => $loginController,
+                    'action' => 'loginProcess'
+                ]
+            ],
+            'login/success' => [
+                'GET' => [
+                    'controller' => $loginController,
+                    'action' => 'success'
+                ],
+                'login' => true
+            ]
         ];
 
         return $routes;
