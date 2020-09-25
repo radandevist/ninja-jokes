@@ -27,7 +27,7 @@ class DatabaseTable
 
     private function processDates($fields)
     {
-        foreach ($fields as $key => $value){
+        foreach ($fields as $key => $value) {
             if ($value instanceof \DateTime) {
                 $fields[$key] = $value->format('Y-m-d');
             }
@@ -97,8 +97,7 @@ class DatabaseTable
                 $fields[$this->primaryKey] = null;
             }
             $this->insert($fields);
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             $this->update($fields);
         }
     }
@@ -119,5 +118,4 @@ class DatabaseTable
         $query = $this->query($sql, $parameters);
         return $query->fetchAll();
     }
-
 }
