@@ -26,7 +26,7 @@ class JokesRoutes implements \NinjaFramework\Routes
 
     public function getRoutes(): array
     {
-        $jokeController = new Joke($this->jokesTable, $this->authorsTable);
+        $jokeController = new Joke($this->jokesTable, $this->authorsTable, $this->authentication);
         $authorController = new Register($this->authorsTable);
         $loginController = new Login($this->authentication);
 
@@ -99,6 +99,12 @@ class JokesRoutes implements \NinjaFramework\Routes
                     'action' => 'success'
                 ],
                 'login' => true
+            ],
+            'logout' => [
+                'GET' => [
+                    'controller' => $loginController,
+                    'action' => 'logout'
+                ]
             ]
         ];
 

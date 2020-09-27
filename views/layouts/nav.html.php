@@ -4,21 +4,29 @@
   </button>
   <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item <?php if ('' === $route) echo 'active'; ?>">
         <a class="nav-link" href='/'>Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href='/joke/list'>list</a>
+      <li class="nav-item <?php if ('joke/list' === $route) echo 'active' ?>">
+        <a class="nav-link" href='/joke/list'>List</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href='/joke/edit'>add</a>
+      <li class="nav-item <?php if ('joke/edit' === $route) echo 'active' ?>">
+        <a class="nav-link" href='/joke/edit'>Add</a>
       </li>
-      <li class="nav-item ml-3">
-        <a class="nav-link btn btn-primary text-white" href="/author/register" role="button">Register</a>
-      </li>
-      <li class="nav-item ml-3">
-        <a class="nav-link btn btn-primary btn-success text-white" href="/login" role="button">Login</a>
-      </li>
+      
+      <?php if(!$loggedIn): ?>
+        <li class="nav-item ml-3">
+          <a class="nav-link btn btn-primary text-white" href="/author/register" role="button">Register</a>
+        </li>
+        <li class="nav-item ml-3">
+          <a class="nav-link btn btn-primary btn-success text-white" href="/login" role="button">Login</a>
+        </li>
+      <?php else: ?>
+        <li class="nav-item ml-3">
+          <a class="nav-link btn btn-primary btn-success text-white" href="/logout" role="button">Log Out</a>
+        </li>
+      <?php endif; ?>
+
     </ul>
   </div>
 </nav>

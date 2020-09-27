@@ -18,6 +18,8 @@
     
     <main>
         <div class="container">
+            <?php //var_dump($_SESSION); ?>
+
             <?php echo $content ?>
         </div>
     </main>

@@ -57,7 +57,15 @@ class EntryPoint
                 $content = $this->loadTemplate(($page['content']));
             }
 
-            include_once __DIR__.'/../../views/layouts/main.html.php';
+            // include_once __DIR__.'/../../views/layouts/main.html.php';
+            echo $this->loadTemplate(
+                '../layouts/main.html.php', [
+                    'loggedIn' => $auth->isLoggedIn(),
+                    'content' => $content,
+                    'title' => $title,
+                    'route' => $this->route
+                ]
+            );
         }
     }
 }

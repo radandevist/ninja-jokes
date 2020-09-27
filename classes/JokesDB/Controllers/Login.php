@@ -73,4 +73,14 @@ class Login
             'title' => 'Login successful'
         ];
     }
+
+    public function logout()
+    {
+        unset($_SESSION);
+        session_destroy();
+        return [
+            'content' => 'logout.html.php',
+            'title' => 'log out'
+        ];
+    }
 }

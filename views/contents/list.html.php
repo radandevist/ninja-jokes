@@ -16,9 +16,11 @@
                      ?>
             </small>
             <form class="d-flex justify-content-end" action="/joke/delete" method="post">
-               <a class="btn btn-link pt-0" href="/joke/edit?id=<?php echo $joke['id'] ?>">edit</a>
+               <?php if($userId === $joke['authorId']): ?>
+                  <a class="btn btn-link pt-0" href="/joke/edit?id=<?php echo $joke['id'] ?>">edit</a>
+                  <button class="btn btn-link border-0 pt-0" type="submit">Delete</button>
+               <?php endif; ?>
                <input type="hidden" name="id" value="<?php echo $joke['id'] ?>">
-               <button class="btn btn-link border-0 pt-0" type="submit">Delete</button>
             </form>
          </div>
       <!-- </div> -->
