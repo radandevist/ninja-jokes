@@ -1,0 +1,6 @@
+# .gitignore
+# config/
+.vscode/
+.kdev4/
+phpninja.kdev4
+/vendor/
