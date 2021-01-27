@@ -2,6 +2,7 @@
 @import './pages/list.css';
 @import './pages/add.css';
 @import './pages/register.css';
+@import './pages/login.css';
 
 /* GENERAL */
 body {

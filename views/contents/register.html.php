@@ -12,6 +12,8 @@
             </div>
         <?php endif;?>
 
+        <?php include_once __DIR__."/demo-credentials.html.php" ?>
+
         <form action="" method="post">
             
             <?= $form->input('text', 'name', 'author[name]', 'your name', $author['name'] ?? ''); ?>
