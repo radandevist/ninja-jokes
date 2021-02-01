@@ -1,4 +1,9 @@
 #home {
-    padding-top: 10rem;
+    padding-top: 5rem;
 }
 
+#home .home-image {
+    height: 7rem;
+    width:  auto;
+    margin-bottom: 2rem;
+}
