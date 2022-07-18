@@ -4,4 +4,4 @@
 
 ## Demo
 
-You can test this app at [ninjajokes.epizy.com](http://ninjajokes.epizy.com)
+<s>You can test this app at [ninjajokes.epizy.com](http://ninjajokes.epizy.com)</s>
